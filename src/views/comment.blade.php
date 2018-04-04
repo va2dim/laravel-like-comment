@@ -1,19 +1,19 @@
 <?php
 $GLOBALS['commentDisabled'] = "";
-if(!Auth::check())
-    $GLOBALS['commentDisabled'] = "disabled";
+/*if(!Auth::check())
+    $GLOBALS['commentDisabled'] = "disabled";*/
 $GLOBALS['commentClass'] = -1;
 ?>
 <div class="laravelComment" id="laravelComment-{{ $comment_item_id }}">
-    <h3 class="ui dividing header">Comments</h3>
+    <h3 class="ui dividing header">Comments</h3>ss
     <div class="ui threaded comments" id="{{ $comment_item_id }}-comment-0">
         <button class="ui basic small submit button" id="write-comment" data-form="#{{ $comment_item_id }}-comment-form">Write comment</button>
         <form class="ui laravelComment-form form" id="{{ $comment_item_id }}-comment-form" data-parent="0" data-item="{{ $comment_item_id }}" style="display: none;">
             <div class="field">
                 <textarea id="0-textarea" rows="2" {{ $GLOBALS['commentDisabled'] }}></textarea>
-                @if(!Auth::check())
-                    <small>Please Log in to comment</small>
-                @endif
+                <!--if(!Auth::check())
+                    1<small>Please Log in to comment</small>1
+                endif-->
             </div>
             <input type="submit" class="ui basic small submit button" value="Comment" {{ $GLOBALS['commentDisabled'] }}>
         </form>
@@ -43,9 +43,9 @@ function dfs($comments, $comment){
             <form id="{{ $comment->id }}-reply-form" class="ui laravelComment-form form" data-parent="{{ $comment->id }}" data-item="{{ $comment->item_id }}" style="display: none;">
                 <div class="field">
                     <textarea id="{{ $comment->id }}-textarea" rows="2" {{ $GLOBALS['commentDisabled'] }}></textarea>
-                    @if(!Auth::check())
-                        <small>Please Log in to comment</small>
-                    @endif
+                    <!--if(!Auth::check())
+                        2<small>Please Log in to comment</small>2
+                    endif-->
                 </div>
                 <input type="submit" class="ui basic small submit button" value="Comment" {{ $GLOBALS['commentDisabled'] }}>
             </form>

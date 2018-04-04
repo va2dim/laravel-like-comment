@@ -30,13 +30,14 @@ class LikeController extends Controller
      **/
     public function vote(Request $request)
     {
-    	/* Check if user is loged in*/
+    	/* Check if user is loged in
     	if (!Auth::check()) {
     		return response()->json(['flag' => 0]);
-    	}
+    	}*/
 
     	/* Prepare data */
-    	$userId = Auth::user()->id;
+    	//$userId = Auth::user()->id;
+        $userId = 1;
     	$itemId = $request->item_id;
     	$vote = $request->vote;
 
@@ -101,21 +102,23 @@ class LikeController extends Controller
 		}
 
 		$yourVote = 0; // 0 = Not voted, 1 = Liked, -1 = Disliked
-		if (Auth::check()) {
+		//if (Auth::check()) {
 			$checkYourVote = \risul\LaravelLikeComment\Models\Like::where([
-																	'user_id' => Auth::user()->id,
+																	//'user_id' => Auth::user()->id,
+                                                                    'user_id' => 1,
 																	'item_id' => $itemId
 																	])->first();
 			if ($checkYourVote != NULL) {
 				$yourVote = $checkYourVote->vote;
 			}
-		}
+		//}
 
 		$likeDisabled = "";
+		/*
 		if (!Auth::check()) {
 			$likeDisabled = "disabled";
 		}
-
+*/
 		$likeIconOutlined = $yourVote == 1 ? "" : "outline";
 		$dislikeIconOutlined = $yourVote == -1 ? "" : "outline";
 

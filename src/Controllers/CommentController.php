@@ -27,7 +27,8 @@ class CommentController extends Controller
      * @author 
      **/
     public function add(Request $request){
-    	$userId = Auth::user()->id;
+    	//$userId = Auth::user()->id;
+        $userId = 1;
     	$parent = $request->parent;
     	$commentBody = $request->comment;
     	$itemId = $request->item_id;
