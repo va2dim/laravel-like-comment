@@ -31,6 +31,8 @@ class CommentController extends Controller
         $userId = 1;
     	$parent = $request->parent;
     	$commentBody = $request->comment;
+        $author = $request->author; //
+
     	$itemId = $request->item_id;
 
         $user = self::getUser($userId);
@@ -45,12 +47,14 @@ class CommentController extends Controller
 	    $comment->parent_id = $parent;
 	    $comment->item_id = $itemId;
 	    $comment->comment = $commentBody;
+        $comment->content = $commentBody;
+        $comment->author = $author;
 
 	    $comment->save();
 
 	    $id = $comment->id;
-    	return response()->json(['flag' => 1, 'id' => $id, 'comment' => $commentBody, 'item_id' => $itemId, 'userName' => $user['name'], 'userPic' => $userPic]);
-// dd($comment);
+        return response()->json(['flag' => 1, 'id' => $id, 'comment' => $commentBody, 'item_id' => $itemId, 'userName' => $author, 'userPic' => $userPic, 'author' => $author, 'content' => $commentBody]);
+
     }
 
     /**
@@ -77,8 +81,9 @@ class CommentController extends Controller
             $userId = $comment->user_id;
             $user = self::getUser($userId);
             $comment->name = $user['name'];
-            $comment->email = $user['email'];
-            $comment->url = $user['url'];
+            $comment->name = $comment->author;
+            //$comment->email = $user['email'];
+            //$comment->url = $user['url'];
 
             if($user['avatar'] == 'gravatar'){
                 $hash = md5(strtolower(trim($user['email'])));
